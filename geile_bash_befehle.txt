@@ -1,0 +1,15 @@
+
+#Pattern Matching
+? steht für ein Zeichen 
+A?.txt kann also AB.txt oder AC.txt sein 
+
+[] steht für mehrere Zeichen in den Brackets
+[A-D].txt kann also für A.txt B.txt C.txt oder D.txt stehen
+
+[A-D]* jeder File der mit A,B,C oder D anfängt
+
+[^ABC] alles außer ABC 
+
+iterate über verscheidene Möglichkeiten img.{png,jpg,svg}
+
+
