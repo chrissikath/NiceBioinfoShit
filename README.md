@@ -13,3 +13,21 @@ https://eriqande.github.io/eca-bioinf-handbook/alignment-of-sequence-data-to-a-r
 PS1='[\W]--% '
 --> Zeigt dir danach immer an in welchem Ordner man sich befindet
 
+## Mapping, Count etc. 
+
+- Mapping with STAR
+```
+#!/bin/sh    
+GENOMEDIR="/home/horn/2021_Celegans/20210902_alex_data/genome/wormbase/STARIndex/
+FASTQ="/home/biochemistry/2003KNO-0044/01.RawData/"                                                    
+MAPPINGS="/home/christina/results/mappings/"
+# mixed                                                                   
+for i in $(ls $FASTQ*.fastq.gz | cut -d"_" -f1 | rev | cut -d"/" -f1 | rev | uniq); do             
+  echo $i                                                                                      
+  STAR --genomeDir $GENOMEDIR --readFilesIn ${FASTQ}${i}_1.fastq.gz ${FASTQ}${i}_2.fastq.gz \                     --runThreadN 20 --outFileNamePrefix "../analysis/$i" \                                                  --outSAMtype BAM Unsorted --quantMode GeneCounts \                                                      --outSAMstrandField intronMotif                                                     
+done
+```
+
+
+
+
