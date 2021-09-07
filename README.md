@@ -16,15 +16,21 @@ PS1='[\W]--% '
 ## Mapping, Count etc. 
 
 - Mapping with STAR
+  - ist ein Mapping Algorithmus, heißt aligned die paired-end Sequencing files and das Genome 
 ```
 #!/bin/sh    
 GENOMEDIR="/home/horn/2021_Celegans/20210902_alex_data/genome/wormbase/STARIndex/
 FASTQ="/home/biochemistry/2003KNO-0044/01.RawData/"                                                    
 MAPPINGS="/home/christina/results/mappings/"
 # mixed                                                                   
-for i in $(ls $FASTQ*.fastq.gz | cut -d"_" -f1 | rev | cut -d"/" -f1 | rev | uniq); do             
+for i in $(ls $FASTQ*.fastq.gz | cut -d"_" -f1 | rev | cut -d"/" -f1 | rev | uniq); do  #           
   echo $i                                                                                      
-  STAR --genomeDir $GENOMEDIR --readFilesIn ${FASTQ}${i}_1.fastq.gz ${FASTQ}${i}_2.fastq.gz \                     --runThreadN 20 --outFileNamePrefix "../analysis/$i" \                                                  --outSAMtype BAM Unsorted --quantMode GeneCounts \                                                      --outSAMstrandField intronMotif                                                     
+  STAR --genomeDir $GENOMEDIR \ #StarIndex Ordner (muss vorher erstellt werden)
+  --readFilesCommand zcat \ 
+  --readFilesIn ${FASTQ}${i}_1.fastq.gz ${FASTQ}${i}_2.fastq.gz  \ #paired-end sequenzen
+  --runThreadN 20 --outFileNamePrefix "../analysis/$i" \ # output Ordner
+  --outSAMtype BAM Unsorted --quantMode GeneCounts \                                                  
+  --outSAMstrandField intronMotif                                                     
 done
 ```
 
